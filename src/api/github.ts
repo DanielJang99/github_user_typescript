@@ -1,4 +1,13 @@
-export interface GithubProfile {
+import axios from "axios";
+
+export async function getUserProfile(user: string) {
+    const response = await axios.get<GithubProfile>(
+        `https://api.github.com/users/${user}`
+    );
+    return response.data;
+}
+
+export type GithubProfile = {
     login: string;
     id: number;
     node_id: string;
@@ -31,4 +40,4 @@ export interface GithubProfile {
     following: number;
     created_at: Date;
     updated_at: Date;
-}
+};
